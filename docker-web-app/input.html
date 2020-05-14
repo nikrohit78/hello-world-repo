@@ -1,0 +1,56 @@
+<html>
+<head>
+
+<script>
+
+
+function myFunction() {
+  //alert('button clicked');
+  
+  var age = document.getElementById("age").value;
+  var salary = document.getElementById("salary").value;
+  
+  // Create a request variable and assign a new XMLHttpRequest object to it.
+	var request = new XMLHttpRequest()
+	
+	// Open a new connection, using the GET request on the URL endpoint
+	request.open('GET', 'http://localhost:8095/rest/rules/rule1/'+age+'/'+salary, true);
+	
+	request.onload = function() {
+	  // Begin accessing JSON data here
+	  //alert('JSON processing here');
+	  // Begin accessing JSON data here
+		
+		//alert(request.status);
+		if (request.status >= 200 && request.status < 400) {
+		//alert(this.response);
+		document.getElementById("elig").value = this.response;
+		
+		} else {
+			alert("Some error...!!!");
+		}
+	}
+	
+	// Send request
+	request.send();
+  
+  
+}
+
+</script>
+
+</head>
+<body>
+
+Please enter the Card eligibility details :
+<br><br>
+Age : <input id='age' type='text' /> <br><br>
+Salary : <input id='salary' type='text' /> <br><br>
+
+<input type='button' value='Check Eligibility' onclick="myFunction()"/>
+<br><br>
+<input type='label' value='Checking...' id='elig' disable='true' size=70 />
+
+</body>
+
+</html>
